@@ -29,6 +29,13 @@ app.use(function(req, res, next) {
 });
 
 app.use('/api/categories', require('./routes/categories'));
+app.use('/api/clients', require('./routes/clients'));
+app.use('/api/providers', require('./routes/providers'));
+app.use('/api/providers', require('./routes/providers'));
+app.use('/api/expenses', require('./routes/expenses'));
+app.use('/api/products', require('./routes/products'));
+app.use('/api/sales', require('./routes/sales'));
+app.use('/api/users', require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

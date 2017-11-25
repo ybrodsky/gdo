@@ -6,9 +6,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    units: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+    total: {
+      type: DataTypes.DOUBLE,
+      defaultValue: 0
     },
     client_id: {
       type: DataTypes.INTEGER,
