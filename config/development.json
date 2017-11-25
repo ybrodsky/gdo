@@ -1,0 +1,10 @@
+{
+	"dbConfig": {
+		"username": "root",
+    "password": "Cerrito844",
+    "database": "gdo",
+    "host": "database",
+    "dialect": "mysql"
+	},
+	"port": 3000
+}

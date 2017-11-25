@@ -1,0 +1,15 @@
+FROM node:8.5.0
+
+RUN npm install nodemon -g
+
+RUN mkdir /gdo
+
+WORKDIR /gdo
+ADD package.json /gdo/package.json
+ADD nodemon.json /gdo/nodemon.json
+
+EXPOSE 3000
+EXPOSE 9229
+EXPOSE 5858
+
+CMD NODE_ENV=development nodemon --inspect bin/www -L
