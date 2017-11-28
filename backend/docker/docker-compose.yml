@@ -2,28 +2,28 @@ version: '3'
 
 #docker-compose -f docker/docker-compose.yml up
 services:
-  database:
+  database_gdo:
     build:
       dockerfile: docker/DockerfileDatabase
       context: ../
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Cerrito844
-  phpmyadmin:
+  phpmyadmin_gdo:
     image: phpmyadmin/phpmyadmin
     links:
-      - database
+      - database_gdo
     environment:
-      PMA_HOST: database
+      PMA_HOST: database_gdo
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: "Cerrito844"
     ports:
       - "4001:80"
-  server:
+  server_gdo:
     depends_on:
-      - database
+      - database_gdo
     links:
-      - database:database
+      - database_gdo:database_gdo
     build:
       dockerfile: docker/DockerfileServer
       context: ../

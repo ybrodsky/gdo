@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(require('cors')());
+app.options(require('cors')());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

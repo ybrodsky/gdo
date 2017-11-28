@@ -3,7 +3,7 @@
 		"username": "root",
     "password": "Cerrito844",
     "database": "gdo",
-    "host": "database",
+    "host": "database_gdo",
     "dialect": "mysql"
 	},
 	"port": 3000
