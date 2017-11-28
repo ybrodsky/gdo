@@ -1,0 +1,73 @@
+$table-width: (
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
+  39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
+  57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74,
+  75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92,
+  93, 94, 95, 96, 97, 98, 99, 100
+);
+
+$body-bg: #f5f5f5;
+$footer-height: 40px;
+$login-bg: #333;
+
+$navbar-top-bg:								#F1F1F1;
+$navbar-top-color:						#333;
+$navbar-top-hover-bg:					#333;
+$navbar-top-hover-color:			white;
+
+$navbar-bottom-bg:						#333;
+$navbar-bottom-color:					white;
+$navbar-bottom-focus-bg:			white;
+$navbar-bottom-focus-color:		#333;
+
+$light-button-text-color:			#333;
+$dark-button-text-color:			white;
+
+$colors: (
+  watermelon:                 #FF5B57,
+  melon:                      (bg: #FCAF3B, text: $light-button-text-color),
+  lemon:                      (bg: #FCD727, text: $light-button-text-color),
+  banana:                     (bg: #FDD245, text: $light-button-text-color),
+  orange:                     #E97403,
+  cherry:                     #AB0101,
+  raspberry:                  #E33F4B,
+  grape:                      #4C4A69,
+  kiwi:                       #A7CF3A,
+  apple:                      #C22126,
+  peach:                      #CE571D,
+  lime:                       #829A3C,
+  strawberry:                 #DD321E,
+  blackberry:                 #312D2C,
+  blueberry:                  #36384B,
+);
+
+//Custom navbar (oportunidades y presupuesto)
+$custom-nav-background-color:									#333;
+$custom-nav-text-color:												white;
+
+$custom-navbar-red-color: map-get($colors, 'cherry');
+
+/*
+* Pasajeros en la oportunidad y presupuesto
+*/
+$pasajero-header-bg: #333;
+$pasajero-header-color: white;
+
+/*
+* Tabs
+*/
+
+$tab-bg: white;
+$tab-color: #333;
+
+$tab-bg-hover: #eeeeee;
+$tab-color-hover: #333;
+
+$tab-bg-active: white;
+$tab-color-active: #333;
+
+$tab-border-color: #333;
+
+
+$gmail-color: #d14836;

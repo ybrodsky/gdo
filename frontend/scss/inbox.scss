@@ -1,0 +1,112 @@
+#etiquetas li {
+  i {
+    font-weight: bold;
+  }
+}
+
+#etiquetas li span {
+  margin-left: 5px;
+  padding-left: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  cursor: pointer;
+  cursor: hand;
+  display: block;
+}
+
+#etiquetas li span a {
+  color: #222 !important;
+  display: block;
+}
+
+#etiquetas li span:hover, #etiquetas li span a:hover {
+  background-color: #E6E6E6;
+  text-decoration: none;
+}
+
+#etiquetas li.seleccionada > span:first-child {
+  border-left: 4px solid $gmail-color;
+}
+
+#etiquetas li.seleccionada > span:first-child, #etiquetas li.seleccionada > span:first-child a {
+  padding-left: 11px;
+  color: $gmail-color;
+  font-weight: bold;
+}
+
+.etiquetas-child li span {
+  padding-left: 25px !important;
+}
+
+#inbox-list ul {}
+
+#inbox-list ul li {
+  padding: 5px;
+  border-bottom: 1px solid #D8D8D8;
+  cursor: pointer;
+  cursor: hand;
+}
+
+#inbox-list ul li:hover, #inbox-list ul li.selected {
+  background-color: #E9E9E9;
+  -webkit-box-shadow: 2px 2px 5px 0 rgba(51, 51, 51, 0.5);
+  -moz-box-shadow: 2px 2px 5px 0 rgba(51, 51, 51, 0.5);
+  box-shadow: 1px 1px 2px 1px rgba(51, 51, 51, 0.50);
+}
+
+.delete-checkbox {
+  padding-top: 5px;
+}
+
+#inbox-search {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #D8D8D8;
+}
+
+.unread {
+  font-weight: bold;
+  background-color: white !important;
+}
+
+#inbox-view #inbox-view-header,
+#inbox-view h3.page-header {
+  border-bottom: 1px solid #D8D8D8;
+}
+
+#inbox-view h3.page-header span {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+#inbox-view #inbox-view-header {
+  margin-bottom: 20px;
+  padding-bottom: 10px
+}
+
+.inbox-item {
+  background: #eaeaea;
+  color: #222;
+  @extend .hand-cursor;
+}
+
+#inbox-botonera button {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.gmail-redactar {
+  @extend .btn-danger;
+  @extend .btn-block;
+  text-transform: uppercase;
+  background-color: $gmail-color;
+}
+
+.gmail-redactar:hover {
+  background-color: darken($gmail-color, 5%);
+  color: #fff;
+}
+
+.label-danger {
+  color: white;
+}
+

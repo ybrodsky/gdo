@@ -1,0 +1,222 @@
+<div class="col-md-12">
+  <h2 class="page-header"><i class="fa fa-user"></i> Clientes</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="form" name="form" ng-submit="form.$valid && create()" novalidate>
+        <h3 class="page-header"><i class="fa fa-list"></i> Información basica</h3>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.nombre.$invalid)}">
+              <label>Nombre</label>
+              <input name="nombre" required type="text" ng-model="client.name" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.apellido.$invalid)}">
+              <label>Apellido</label>
+              <input name="apellido" required type="text" ng-model="client.surname" class="form-control">
+              <p class="help-block">Tal como aparece en el documento de viaje</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.nacimiento.$invalid)}">
+              <label>Fecha de nacimiento</label>
+              <input type="text" class="form-control" ng-model="client.birthdate" mask="99/99/9999" placeholder="dd/mm/aaaa" name="nacimiento"/>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Sexo</label>
+              <select ng-change="calcularCuil()" class="form-control" ng-model="client.gender">
+                <option value="" disabled selected>Seleccioná una opción</option>
+                <option value="hombre" selected>Masculino</option>
+                <option value="mujer">Femenino</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.nacionalidad.$invalid)}">
+              <label>Nacionalidad (País)</label>
+              <destinos-autocomplete model="client.nacionalidad" selected="client.nacionalidad" settings="{emptyBtn: true, destino: 'paises', onSelect: 'calcularCuil'}"></destinos-autocomplete>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.dni.$invalid || form.dni.$invalid)}">
+              <label>DNI</label>
+              <input unique-dni maxlength="8" ng-maxlength="8" ng-minlength="7" name="dni" type="text" ng-model="client.dni" class="form-control" ng-change="calcularCuil()">
+              <div ng-messages="form.$submitted && form.dni.$error || form.dni.$error">
+                <p class="help-block" ng-message="client.dni">Ya existe un cliente con ese DNI</p>
+              </div>
+              <p class="help-block">8 caracteres sin puntos ni nada raro</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error': (form.$submitted  && form.pasaporte.$invalid || form.pasaporte.$invalid)}">
+              <label>Pasaporte</label>
+              <input unique-pasaporte name="pasaporte" type="text" ng-model="client.pasaporte" class="form-control">
+              <div ng-messages="form.$submitted && form.pasaporte.$error || form.pasaporte.$error">
+                <p class="help-block" ng-message="client.pasaporte">Ya existe un cliente con ese pasaporte</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="page-header"><i class="fa fa-phone"></i> Información de contacto</h3>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error': (form.email.$invalid && form.email.$touched) || (form.$submitted && (form.email.$invalid && form.phone.$invalid) || form.$error.email)}">
+              <label>Email</label>
+              <input unique-email type="email" name="email" ng-model="client.email" class="form-control" ng-required="!(client.phone.length)">
+              <div ng-messages="form.$submitted && form.email.$error || form.email.$error">
+                <p class="help-block" ng-message="client.email">Ya existe un cliente con ese correo</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && (form.email.$invalid && form.phone.$invalid))}">
+              <label>Teléfono</label>
+              <input type="text" name="phone" ng-model="client.phone" class="form-control" ng-required="!(client.email.length)">
+              <div ng-messages="form.$submitted && (form.phone.$error && form.email.$error)">
+                <p ng-message="required" class="help-block">Por favor completá este campo</p>
+              </div>
+            </div>
+        
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Emails secundarios</label>
+              <tags-input ng-model="client.email_sec" placeholder="Separados por coma">
+              </tags-input>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Telefonos secundarios</label>
+              <tags-input ng-model="client.phone_sec" placeholder="Separados por coma"/>
+              </tags-input>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Dirección</label>
+          <input type="text" ng-model="client.address" class="form-control"/>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <div class="form-group">
+              <label>Ciudad</label>
+              <input class="form-control" ng-model="asyncSelected2" type="text" typeahead-min-length="3" typeahead-on-select="selected($item)" uib-typeahead="item as item.NOMBRE for item in getYcix($viewValue)"/>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <label>Localidad</label>
+              <input type="text" ng-model="client.localidad" class="form-control"/>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Código postal</label>
+              <input type="text" ng-model="client.codigo_postal" class="form-control"/>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="page-header"><i class="fa fa-credit-card"></i> Información de facturación</h3>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Tipo de cliente</label>
+              <select class="form-control" ng-model="client.tipo">
+                <option value="" disabled>Seleccioná una opción</option>
+                <option value="cliente" selected>Cliente</option>
+                <option value="empresa">Empresa</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.cuil.$invalid || form.cuil.$invalid)}">
+              <label>CUIL/CUIT</label>
+              <input unique-cuil maxlength="11" ng-maxlength="11" ng-minlength="11" name="cuil" type="text" ng-model="client.cuil" class="form-control">
+              <div ng-messages="form.$submitted && form.cuil.$error || form.cuil.$error">
+                <p class="help-block" ng-message="client.cuil">Ya existe un cliente con ese CUIL/CUIT</p>
+              </div>
+              <p class="help-block">11 caracteres sin puntos, guiones ni nada raro</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Sit. Fiscal</label>
+              <select class="form-control" ng-model="client.sit_fiscal">
+                <option value="" disabled>Seleccioná una opción</option>
+                <option value="consumidor_final" selected="selected">Consumidor final</option>
+                <option value="responsable_inscripto">Responsable inscripto</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>ID de Ycix</label>
+              <input type="text" ng-model="client.ycix" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="alert alert-info text-center" ng-show="client.tipo == 'empresa' || client.sit_fiscal == 'responsable_inscripto'">
+              Si el Cliente es Responsable Inscripto o una Empresa, el alta en Ycix se tiene que solicitar al sector de Administración para un chequeo previo.
+            </div>
+          </div>
+        </div>
+
+        <h3 class="page-header"><i class="fa fa-plus"></i> Información adicional</h3>
+
+        <div class="row" ng-repeat="n in client.informacion_adicional">
+          <div class="col-md-5">
+            <div class="form-group">
+              <label>Tipo de campo</label>
+              <select class="form-control" ng-options="id as choice for (id, choice) in tipos_campos" ng-model="n.campo">
+                <option value="" disabled>Seleccioná</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Valor</label>
+              <input type="text" ng-model="n.valor" class="form-control" />
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <a class="btn btn-primary btn-xs pull-right" ng-click="client.informacion_adicional.splice(client.informacion_adicional.indexOf(n), 1)">
+                <i class="fa fa-minus"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <hr/>
+        <div class="form-group pull-right">
+          <button class="btn btn-warning" type="submit">
+            GUARDAR
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="form-group">
+	<label ng-if="label">{{label}}</label>
+	<div class="input-group">
+	  <input type="text" ng-model="selected" typeahead-on-select="selectedUser($item)" uib-typeahead="user as user.label for user in getUser($viewValue)" class="form-control" placeholder="Buscar usuario">
+	  <span class="input-group-btn">
+	    <button class="btn btn-default" ng-disabled="!options.emptyBtn" type="button" title="Vaciar" ng-click="vaciar()"><i class="fa fa-times"></i></button>
+	  </span>
+	</div>
+</div>

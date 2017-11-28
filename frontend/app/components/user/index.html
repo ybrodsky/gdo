@@ -1,0 +1,148 @@
+<div class="col-md-12">
+  <h2 class="page-header"><i class="fa fa-users"></i> Usuarios</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="form" ng-submit="page(1)">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" class="form-control" ng-model="filtros.name" placeholder="Nombre" >
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Apellido</label>
+              <input type="text" class="form-control" ng-model="filtros.surname" placeholder="Apellido" >
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" ng-model="filtros.email" placeholder="Email" >
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Rol</label>
+              <select ng-model="filtros.rol_id" class="form-control" ng-options="rol.id as rol.nombre for rol in roles">
+                <option value='' >Indistinto</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Unidad de negocio</label>
+              <select ng-model="filtros.unidad_negocio_id" class="form-control" ng-options="unidad.id as unidad.nombre for unidad in unidades">
+                <option value=''>Indistinta</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Activo</label>
+              <select class="form-control" ng-model="filtros.active">
+                <option value="0">Indistinto</option>
+                <option value="1">Inactivos</option>
+                <option value="2">Activos</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Acepta consultas</label>
+              <select class="form-control" ng-model="filtros.aceptar_consultas">
+                <option value="0">Indistinto</option>
+                <option value="1">No acepta</option>
+                <option value="2">Acepta</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Eliminado</label>
+              <select class="form-control" ng-model="filtros.deleted">
+                <option value="0">Indistinto</option>
+                <option value="1">No eliminado</option>
+                <option value="2">Eliminado</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <button type="submit" class="btn btn-warning btn-block">Filtrar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-10">
+          <div ng-show="users.length">
+            <b>Total de usuarios: {{totalUsers}}</b>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <a ui-sref="app.userAdd" class="btn btn-success btn-block">Agregar usuario</a>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-info text-center" ng-show="!users.length">
+            No se encontraron usuarios
+          </div>
+          <div class="table-responsive">
+            <table class="table table-condensed" ng-show="users.length">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Email</th>
+                  <th>Nombre</th>
+                  <th>Teléfono</th>
+                  <th>Rol</th>
+                  <th>Unidad de negocio</th>
+                  <th>Acepta consultas</th>
+                  <th>Activo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr dir-paginate="n in users | itemsPerPage: 20 | orderBy:sortType:sortReverse" total-items="totalUsers">
+                  <td>{{::n.id}}</td>
+                  <td>{{::n.email}}</td>
+                  <td>{{::n.name}} {{::n.surname}}</td>
+                  <td>{{::n.phone}} {{::n.intern ? 'Int ' + n.intern : ''}}</td>
+                  <td>{{::n.rol.nombre}}</td>
+                  <td>{{::n.unidadnegocio.nombre}}</td>
+                  <td>{{::n.aceptar_consultas ? 'SI' : 'NO'}}</td>
+                  <td>{{::n.active ? 'SI' : 'NO'}}</td>
+                  <td>
+                    <a ui-sref="app.userEdit({id: n.id})" class="btn btn-default btn-block btn-xs">
+                      Editar
+                    </a>
+                    <a ui-sref="app.userDestinos({id: n.id})" class="btn btn-default btn-block btn-xs">
+                      Destinos
+                    </a>
+                    <a ng-click="delete(n)" confirm="¿Confirma que desea eliminar el usuario? No hagas cagadas" class="btn btn-danger btn-block btn-xs">
+                      Eliminar
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pull-right">
+            <dir-pagination-controls max-size="6" on-page-change="page(newPageNumber)"></dir-pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

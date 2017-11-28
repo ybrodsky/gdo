@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app="mainApp">
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/icon.png?v=1" type="image/x-icon" />
+    <title>GDO - Gestion de Operaciones</title>
+    <script>
+      const URL = 'http://10.5.15.123:4000';
+    </script>
+
+    <!-- inject:css -->
+
+    <link rel="stylesheet" href="dev/css/main.css">
+
+    <!-- endinject -->
+
+    <!-- inject:js -->
+
+    <script src="dev/js/main.js"></script>
+
+    <script src="dev/partials/partials.js"></script>
+
+    <!-- endinject -->
+  </head>
+  <body>
+    <div ui-view autoscroll="false" ng-cloak></div>
+  </body>
+</html>

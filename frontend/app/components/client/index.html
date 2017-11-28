@@ -1,0 +1,87 @@
+<div class="col-md-12">
+  <h2 class="page-header"><i class="fa fa-users"></i> Clientes</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="form" ng-submit="page(1)">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" class="form-control" ng-model="filtros.name" placeholder="Nombre" >
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Apellido</label>
+              <input type="text" class="form-control" ng-model="filtros.surname" placeholder="Apellido" >
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Dni</label>
+              <input type="text" class="form-control" ng-model="filtros.dni" placeholder="DNI" >
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <button type="submit" class="btn btn-warning btn-block">Filtrar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+          <a ui-sref="app.clientAdd" class="btn btn-success btn-block">Agregar cliente</a>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-info text-center" ng-show="clients && !clients.length">
+            No se encontraron clientes con los parámetros seleccionados
+          </div>
+          <table class="table table-condensed" ng-show="clients.length">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Domicilio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr dir-paginate="n in clients | itemsPerPage: 10 | orderBy:sortType:sortReverse" total-items="totalClients" pagination-id="client_index_pagination">
+                <td>{{::n.id}}</td>
+                <td>{{::n.name}}</td>
+                <td>{{::n.surname}}</td>
+                <td>{{::n.dni}}</td>
+                <td>{{::n.email}}</td>
+                <td>{{::n.phone}}</td>
+                <td>{{::n.address}}</td>
+                <td>
+                  <a ui-sref="app.clientEdit({id: n.id})" class="btn btn-default btn-xs">
+                    Editar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pull-right" ng-show="clients.length">
+            <dir-pagination-controls max-size="6" on-page-change="page(newPageNumber)" pagination-id="client_index_pagination">
+            </dir-pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

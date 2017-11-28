@@ -1,0 +1,428 @@
+<div class="modal-header">
+  <h3 class="modal-title">
+    Editar componentes
+  </h3>
+</div><!--una buena negradita gdo-->
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>
+        Modificar todos
+        <small style="display:block">
+          <i class="fa fa-exclamation-circle"></i> Modificá todos los componentes al mismo tiempo cambiando estos valores.
+          Los precios son por día (cuando corresponda) y persona, excepto para <b>Paquetes</b>.
+        </small>
+      </h2>
+      <hr/>
+      <form class="form" name="form">
+        <div class="well">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Precio venta:</label>
+                <input class="form-control" type="number" ng-model="global.precio_venta" min="0" ng-min="0"/>
+                <p class="help-block"><i class="fa fa-exclamation-circle"></i> Con IVA</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Precio neto:</label>
+                <input class="form-control" type="number" ng-model="global.precio_neto" min="0" ng-min="0"/>
+                <p class="help-block"><i class="fa fa-exclamation-circle"></i> Sin IVA</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Impuesto:</label>
+                <input class="form-control" type="number" ng-model="global.impuesto" min="0" ng-min="0"/>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <select-iva model="global.condicion_iva"></select-iva>
+            </div>
+          </div>
+          <div class="row" ng-if="tipo != 'Transport' && tipo != 'Extra' && tipo != 'Traslado'">
+            <div class="col-md-6">
+              <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.desde.$invalid)}">
+                <label>Desde:</label>
+                <div class="input-group">
+                  <input class="form-control" close-text="Close" datepicker-options="{formatYear: 'yy',startingDay: 1}" is-open="bulk_opened" max-date="budget.salida_hasta" min-date="budget.salida_desde" name="desde" ng-click="bulk_opened = !bulk_opened" ng-model="global.desde" readonly="" type="date" uib-datepicker-popup=""/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="bulk_opened = !bulk_opened" type="button">
+                      <i class="glyphicon glyphicon-calendar">
+                      </i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.hasta.$invalid)}">
+                <label>Hasta:</label>
+                <div class="input-group">
+                  <input class="form-control" close-text="Close" datepicker-options="{formatYear: 'yy',startingDay: 1}" is-open="bHasta_opened" max-date="budget.salida_hasta" min-date="budget.salida_desde" name="hasta" ng-click="bHasta_opened = !bHasta_opened" ng-model="global.hasta" readonly="" type="date" uib-datepicker-popup=""/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="bHasta_opened = !bHasta_opened" type="button">
+                      <i class="glyphicon glyphicon-calendar">
+                      </i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" ng-if="tipo == 'Bus'">
+            <div class="col-md-12">
+              <hr/>
+              <a ng-click="editarRuta = !editarRuta" class="btn btn-primary btn-xs">Editar ruta</a>
+              <hr/>
+            </div>
+            <div class="col-md-12" ng-show="editarRuta">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.desde.$invalid)}">
+                    <label>Ida</label>
+                    <input name="desde" ng-click="ss = !ss" type="date" class="form-control" uib-datepicker-popup ng-model="global.desde" is-open="ss" datepicker-options="{minDate: budget.salida_desde, maxDate: budget.salida_hasta}" readonly />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.horario_desde.$invalid)}">
+                    <label>Horario salida</label>
+                    <input class="form-control" mask="99:99" name="horario_desde" ng-minlength="4" ng-model="global.desde_hora" placeholder="hh:mm" type="text"/>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.desde_hora_llegada.$invalid)}">
+                    <label>Horario llegada</label>
+                    <input class="form-control" mask="99:99" name="desde_hora_llegada" ng-minlength="4" ng-model="global.desde_hora_llegada" placeholder="hh:mm" type="text"/>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-show="global.recorrido == 'IDA_VUELTA'">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.hasta.$invalid)}">
+                      <label>Vuelta</label>
+                      <input name="hasta" ng-click="hh = !hh" type="date" class="form-control" uib-datepicker-popup ng-model="global.hasta" is-open="hh" datepicker-options="{minDate: budget.salida_desde, maxDate: budget.salida_hasta}" readonly />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.horario2.$invalid)}">
+                      <label>Horario salida</label>
+                      <input class="form-control" mask="99:99" name="horario2" ng-minlenght="4" ng-model="global.hasta_hora" placeholder="hh:mm" type="text"/>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.hasta_hora_llegada.$invalid)}">
+                      <label>Horario llegada</label>
+                      <input class="form-control" mask="99:99" name="hasta_hora_llegada" ng-minlength="4" ng-model="global.hasta_hora_llegada" placeholder="hh:mm" type="text"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" ng-if="tipo == 'Traslado'">
+            <div class="col-md-12">
+              <hr/>
+              <a ng-click="editarRuta = !editarRuta" class="btn btn-primary btn-xs">Editar ruta</a>
+            </div>
+
+            <div class="col-md-12" ng-show="editarRuta">
+              <h3 class="page-header"><i class="fa fa-sign-in"></i> Ida</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Fecha in</label>
+                    <input name="desde" ng-click="ss = !ss" type="date" class="form-control" uib-datepicker-popup ng-model="global.desde" is-open="ss" datepicker-options="{minDate: budget.salida_desde, maxDate: budget.salida_hasta}" readonly />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Horario</label>
+                    <input class="form-control" mask="99:99" name="horario" ng-minlength="4" ng-model="global.desde_hora" placeholder="hh:mm" type="text"/>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>N° de Referencia</label>
+                    <input class="form-control" ng-model="global.informacion_desde" type="text"/>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Pick up (in)</label>
+                    <div class="input-group">
+                      <input class="form-control" ng-model="global.desde_pick_up" type="text"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Drop off (in)</label>
+                    <div class="input-group">
+                      <input class="form-control" ng-model="global.desde_drop_off" type="text"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-show="global.recorrido == 'ENTRADA_SALIDA'">
+                <h3 class="page-header"><i class="fa fa-sign-in fa-flip-horizontal"></i> Vuelta</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Fecha out</label>
+                      <input name="hasta" ng-click="hh = !hh" type="date" class="form-control" uib-datepicker-popup ng-model="global.hasta" is-open="hh" datepicker-options="{minDate: budget.salida_desde, maxDate: budget.salida_hasta}" readonly />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Horario</label>
+                      <input class="form-control" mask="99:99" name="horario2" ng-minlenght="4" ng-model="global.hasta_hora" placeholder="hh:mm" type="text"/>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>N° de Referencia</label>
+                      <input class="form-control" ng-model="global.informacion_hasta" type="text"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Pick up (out)</label>
+                      <div class="input-group">
+                        <input class="form-control" ng-model="global.hasta_pick_up" type="text"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Drop off (out)</label>
+                      <div class="input-group">
+                        <input class="form-control" ng-model="global.hasta_drop_off" type="text"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <desglose model="global" ng-if="tipo == 'Package' || tipo == 'Hotel'"></desglose>
+
+          <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.idres.$invalid)}">
+            <label>ID Reserva</label>
+            <input name="idres" type="text" class="form-control" ng-model="global.id_reserva"/>
+          </div>
+          <div ng-if="tipo == 'Transport'"  restrict="admin, aereos, operaciones">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.facial.$invalid)}">
+                  <label>Facial:</label>
+                  <input class="form-control" min="0" name="facial" ng-min="0" ng-model="global.facial" required type="number"/>
+                  <div ng-messages="form.$submitted && form.facial.$error">
+                    <p class="help-block" ng-message="min">
+                      El valor tiene que ser mayor o igual a 0
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.impuestos.$invalid)}">
+                  <label>Impuestos:</label>
+                  <input class="form-control" min="0" name="impuestos" ng-min="0" ng-model="global.impuesto" required="" type="number"/>
+                  <div ng-messages="form.$submitted && form.impuestos.$error">
+                    <p class="help-block" ng-message="required">
+                      Por favor completá este campo
+                    </p>
+                    <p class="help-block" ng-message="min">
+                      El valor tiene que ser mayor o igual a 0
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.condicion_over.$invalid)}">
+                  <label>Condición over:</label>
+                  <select class="form-control" name="condicion_over" ng-model="global.condicion_over">
+                    <option value="PUTO">Nada</option>
+                    <option value="D">Directo</option>
+                    <option value="I">Indirecto</option>
+                    <option value="X">Manual</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.over.$invalid)}">
+                  <label>Over:</label>
+                  <input class="form-control" min="0" name="over" ng-min="0" ng-model="global.over" required type="number"/>
+                  <div ng-messages="form.$submitted && form.over.$error">
+                    <p class="help-block" ng-message="min">
+                      El valor tiene que ser mayor o igual a 0
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.qn.$invalid)}">
+                  <label>QN:</label>
+                  <input class="form-control" min="0" name="qn" ng-min="0" ng-model="global.qn" required type="number"/>
+                  <div ng-messages="form.$submitted && form.qn.$error">
+                    <p class="help-block" ng-message="min">
+                      El valor tiene que ser mayor o igual a 0
+                    </p>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-md-offset-3">
+                <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.comision.$invalid)}">
+                  <label>Comisión:</label>
+                  <input class="form-control" min="0" name="comision" ng-min="0" ng-model="global.comision" required type="number"/>
+                  <div ng-messages="form.$submitted && form.comision.$error">
+                    <p class="help-block" ng-message="min">
+                      El valor tiene que ser mayor o igual a 0
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Iva neto:</label>
+                  <input class="form-control" ng-model="global.iva_neto" type="number" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-md-offset-3">
+                <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.neto.$invalid)}">
+                  <label>Precio neto:</label>
+                  <input class="form-control" min="0" name="neto" ng-min="0" ng-model="global.precio_neto" required="" type="number"/>
+                  <div ng-messages="form.$submitted && form.neto.$error">
+                    <p class="help-block" ng-message="required">
+                      Por favor completá este campo
+                    </p>
+                    <p class="help-block" ng-message="min">
+                      El valor tiene que ser mayor o igual a 0
+                    </p>
+                  </div>
+                  <p class="help-block">
+                    <i class="fa fa-exclamation-circle">
+                    </i>
+                    Sin IVA
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>PNR:</label>
+                  <input class="form-control" ng-model="global.id_reserva" type="text"/>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-md-offset-3">
+                <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.venta_neta.$invalid)}">
+                  <label>Vta neta:</label>
+                  <input class="form-control" min="0" name="venta_neta" ng-min="0" ng-model="global.venta_neta" required="" type="number"/>
+                  <div ng-messages="form.$submitted && form.venta_neta.$error">
+                    <p class="help-block" ng-message="required">
+                      Por favor completá este campo
+                    </p>
+                    <p class="help-block" ng-message="min">
+                      El valor tiene que ser mayor o igual a 0
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Pagar BSP:</label>
+                  <input class="form-control" ng-model="global.pagar_bsp" type="number" readonly />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div ng-if="tipo == 'Transport'" class="row" restrict="admin, supervisor, gerente, vendedor">
+            <div class="col-md-12">
+              <hr/>
+              <div>
+                <a ng-click="editarRuta = !editarRuta" class="btn btn-primary btn-xs">
+                  Editar ruta
+                </a>
+              </div>
+              <div ng-show="editarRuta">
+                <div ng-include src="'transport/include/ruta_itinerario_bulk.html'"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <button ng-click="editarIndividual = !editarIndividual" class="btn btn-success btn-xs">
+          Editar individualmente
+        </button>
+        <div ng-switch="tipo" ng-show="editarIndividual">
+          <h2>
+            Modificar los componentes individualmente
+            <small style="display:block">
+              <i class="fa fa-exclamation-circle"></i> 
+              Modificá cada componente de manera individual. Los precios son por persona, excepto para <b>Autos y Hoteles</b>
+
+            </small>
+          </h2>
+          <hr/>
+          <div ng-switch-when="Asistencia">
+            <div ng-include="'asistencia/edit_bulk_modal.html'"></div>
+          </div>
+          <div ng-switch-when="Atraccion">
+            <div ng-include="'atraccion/edit_bulk_modal.html'"></div>
+          </div>
+          <div ng-switch-when="Auto">
+            <div ng-include="'auto/edit_bulk_modal.html'"></div>
+          </div>
+          <div ng-switch-when="Extra">
+            <div ng-include="'extra/edit_bulk_modal.html'"></div>
+          </div>
+          <div ng-switch-when="Hotel">
+            <div ng-include="'hotel/edit_bulk_modal.html'"></div>
+          </div>
+          <div ng-switch-when="Package">
+            <div ng-include="'package/edit_bulk_modal.html'"></div>
+          </div>
+          <div ng-switch-when="Traslado">
+            <div ng-include="'traslado/edit_bulk_modal.html'"></div>
+          </div>
+          <div ng-switch-when="Transport">
+            <div ng-include="'transport/edit_bulk_modal.html'"></div>
+          </div>
+          <div ng-switch-when="Bus">
+            <div ng-include="'bus/edit_bulk_modal.html'"></div>
+          </div>
+          <div ng-switch-when="Cruise">
+            <div ng-include="'cruise/edit_bulk_modal.html'"></div>
+          </div>
+        </div>
+    	</form>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="ok()">
+    <i class="fa fa-save"></i> Guardar
+  </button>
+  <button class="btn btn-danger" type="button" ng-click="cancel()">
+    <i class="fa fa-times"></i> Cerrar
+  </button>
+</div>

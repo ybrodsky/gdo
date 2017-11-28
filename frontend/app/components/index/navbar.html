@@ -1,0 +1,75 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+        <span class="sr-only">Toggle navigation
+        <span class="icon-bar">
+        <span class="icon-bar">
+        <span class="icon-bar">
+      </button>
+      <a class="navbar-brand" ui-sref="app.dashboard">
+      	Gestion de Operaciones
+    	</a>
+
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav navbar-left">
+        <li>
+        	<a ui-sref="app.productsIndex">Productos</a>
+      	</li>
+      	<li>
+        	<a ui-sref="app.clientsIndex">Clientes</a>
+      	</li>
+        <li uib-dropdown>
+	        <a href="#" uib-dropdown-toggle>Reportes <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	          <li>
+	            <a ui-sref="app.formasPago">Formas de pago</a>
+	          </li>
+	        </ul>
+	      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+	      <li class="" uib-dropdown>
+	        <a  class="" uib-dropdown-toggle>
+	          <i class="fa fa-user"></i>
+	        </a>
+	        <ul class="dropdown-menu">
+	          <li>
+	            <a ui-sref="app.micuenta"><i class="fa fa-user fa-fw"></i> Mi cuenta</a>
+	          </li>
+	          <li>
+	            <a ui-sref="app.contactoIndex"><i class="fa fa-book fa-fw"></i> Mis contactos</a>
+	          </li>
+	          <li>
+	            <a ui-sref="logout"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
+	          </li>
+	        </ul>
+	      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid" id="main-container">
+  <div class="row">
+    <div class="col-md-12">
+      <ajax-loader></ajax-loader>
+    </div>
+  </div>
+  <div class="row">
+  	<div ui-view autoscroll="false" ng-cloack></div>
+  </div>
+</div>
+
+
+<footer class="footer">
+  <div class="container">
+  	<div class="footer-content">
+    	<p class="text-muted">
+    		Gestion de Operaciones @2018
+  		</p>
+  	</div>
+  </div>
+</footer>

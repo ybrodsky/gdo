@@ -1,0 +1,408 @@
+.buscador-aereos {
+  background-color: #212121;
+  padding-top: 10px;
+}
+
+.buscador-aereos label {
+  color: #FFF;
+}
+
+.buscador-aereos .titulo-formulario {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFF;
+}
+
+.buscador-aereos .titulo-formulario span a, .buscador-aereos .titulo-formulario span a:hover {
+  font-size: 12px;
+  font-weight: lighter;
+  cursor: pointer;
+  color: #F7432C;
+  text-decoration: none;
+}
+
+.input-group-btn > button {
+  min-height: 34px !important
+}
+
+.agregar-tramo, .agregar-tramo:hover {
+  color: #60b044;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.buscador-aereos .btn-success {
+  background-color: #60b044;
+}
+
+#resultado-busqueda-aereos {
+  color: #666;
+}
+
+#resultado-busqueda-aereos .resultado-busqueda-contenedor {
+  margin-bottom: 1%;
+  border: 1px solid #CCC;
+  border-top: 3px solid #CCC;
+  /*float: left;
+  width: 100%;*/
+  background-color: #212121;
+}
+
+.fondo-content {
+  background: #FFF;
+  min-height: 185px;
+}
+
+#resultado-busqueda-aereos .resultado-busqueda-precio {
+  background-color: #212121;
+  padding-top: 10px;
+  font-size: 11px;
+  color: #FFF;
+}
+
+#resultado-busqueda-aereos .resultado-busqueda-precio .resultado-busqueda-precio-destacado {
+  font-size: 28px;
+}
+
+#resultado-busqueda-aereos .resultado-busqueda-precio .resultado-busqueda-precio-destacado-money {
+  font-size: 18px;
+}
+
+#resultado-busqueda-aereos .resultado-busqueda-precio .resultado-busqueda-precio-detalle {
+  /*width: 100%;
+  padding-left: 0;*/
+  margin-top: 10px;
+}
+
+#resultado-busqueda-aereos .resultado-busqueda-precio li {
+  width: 100%;
+  list-style: none;
+  vertical-align: baseline;
+}
+
+#resultado-busqueda-aereos .resultado-busqueda-precio .total {
+  font-size: 14px;
+  margin-top: 5px;
+  border-top: 1px solid #FBE829!important;
+  padding-top: 5px;
+}
+
+.btn-danger {
+  background: #ff5500;
+}
+
+.deco-content {
+  margin-top: 10px;
+}
+
+.tramo-deco-content {
+  background-color: #F5F5F5;
+  display: inline-block;
+  width: 100%;
+  //height: 45px;
+}
+
+.tramo-deco-content h5 {
+  margin-top: 5px;
+  font-size: 11px;
+  text-transform: capitalize;
+  padding-left: 5%;
+}
+
+.tramo-1 {
+  width: 35%;
+  float: left;
+}
+
+.tramo-2 {
+  width: 28%;
+  float: left;
+}
+
+.tramo-3 {
+  width: 37%;
+  float: left;
+}
+
+.aeropuerto {
+  font-size: 20px;
+  letter-spacing: -1px;
+  font-weight: 700;
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 2px;
+  color: #319FDA;
+}
+
+.tramo-deco {
+  background-color: #60b044;
+  color: #fff;
+  display: inline-block;
+  width: 90px;
+  line-height: 20px;
+  position: relative;
+  height: 20px;
+  padding-left: 5%;
+  font-size: 11px;
+  margin: 0;
+}
+
+.tramo-deco:after {
+  border-bottom: 20px solid transparent;
+  border-left: 15px solid #60b044;
+  content: "";
+  position: absolute;
+  right: -15px;
+  top: 0;
+}
+
+.tramo-deco i {
+  margin-right: 5%;
+}
+
+.fa-rotate-225 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(225deg);
+  -ms-transform: rotate(225deg);
+  transform: rotate(225deg);
+}
+
+.fa-rotate-45 {
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(44deg);
+  transform: rotate(45deg);
+}
+
+.tramo-detalle {
+  float: left;
+  margin: 0 0 10px 0 !important;
+  padding: 0;
+  width: 100%;
+}
+
+.tramo-detalle li {
+  width: 100%;
+  list-style: none;
+  float: left;
+}
+
+.tramo-detalle li:hover {
+  background-color: #f1f6fc;
+}
+
+.lista-tramo-detalle {
+  float: left;
+  padding: 0;
+  width: 100%;
+}
+
+.lista-tramo-detalle li {
+  list-style: none;
+  float: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.seleccionado-tramo-detalle {
+  padding-left: 1%;
+  width: 5% !important;
+}
+
+.input-tramo-detalle {}
+
+.compania-nombre {
+  font-size: 13px;
+  width: 30% !important;
+}
+
+.escalas {
+  width: 20% !important;
+  color: #13AEDA;
+  text-align: center;
+  display: inline-block;
+}
+
+.tramo-horario {
+  font-size: 16px;
+  font-weight: 700;
+  width: 8% !important;
+}
+
+.duracion {
+  width: 10%!important;
+  margin-left: 2%;
+}
+
+.detalle {
+  width: 8%!important;
+  margin-left: 5%;
+  color: #13AEDA;
+  font-size: 11px;
+}
+
+.overlay-x {
+  position: absolute;
+  top: 23%;
+  right: 3%;
+  cursor: pointer;
+  color: #F7432C;
+}
+
+.overlay-wrapper {
+  position: relative;
+}
+
+.detalle-vuelo {
+  float: left;
+  width: 100%;
+  background-color: #EEE;
+  padding: 10px;
+}
+
+.detalle-vuelo-fondo {
+  background-color: #FFF;
+  float: left;
+  width: 100%;
+}
+
+.detalle-vuelo-compania {
+  float: left;
+  width: 96%;
+  font-size: 13px;
+  padding: 5px;
+  border-top: 1px solid #EEE;
+  border-bottom: 1px solid #EEE;
+  margin: 10px 2%;
+}
+
+.detalle-vuelo-informacion {
+  float: left;
+  width: 100%;
+  padding: 0 2%;
+}
+
+.detalle-vuelo-informacion li {
+  float: left;
+  font-size: 11px;
+  color: #888;
+}
+
+.detalle-vuelo-informacion li:hover {
+  background: #FFF;
+}
+
+.detalle-vuelo-informacion li span {
+  color: #444;
+  text-transform: capitalize;
+}
+
+.dv1 {
+  width: 27% !important;
+}
+
+.dv2 {
+  width: 15% !important;
+  text-align: center;
+}
+
+.dv3 {
+  font-size: 16px !important;
+  letter-spacing: -1px;
+  font-weight: 700;
+  color: #666 !important;
+  margin-top: 7px !important;
+  margin-bottom: 2px;
+  float: left;
+  width: 100%;
+}
+
+.dv4 {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0px !important;
+}
+
+.equipo {
+  background: #F5F5F5;
+  color: #666 !important;
+  padding: 5px 10px;
+  width: 30% !important;
+  text-align: left;
+}
+
+.equipo i {
+  margin: 0 5px 0 0;
+}
+
+.detalle-vuelo-informacion .aeropuerto {
+  font-size: 20px;
+  letter-spacing: -1px;
+  font-weight: 700;
+  margin-top: 5px;
+  margin-bottom: 2px;
+  color: #AAA;
+  width: 42%;
+}
+
+.detalle-vuelo-informacion .horario {
+  color: #444;
+}
+
+.tiempo-de-espera {
+  float: left;
+  width: 100%;
+  background-color: #FDF7C5;
+  padding: 5px 0;
+  text-align: center;
+  font-size: 13px;
+}
+
+
+/*************RESERVAR***********/
+
+.detalle-de-compra {
+  background-color: #212121;
+  padding-top: 10px;
+  color: #FFF;
+}
+
+.detalle-de-compra h4 {
+  color: #FFF;
+}
+
+.titulo-reservar {
+  line-height: 18px;
+  margin-bottom: 25px;
+  display: block;
+  color: #f50;
+}
+
+.form-reservar {
+  background: #F5F5F5;
+}
+
+.lista-detalle-tarifa {
+  float: left;
+  width: 100%;
+  padding: 0;
+}
+
+.lista-detalle-tarifa li {
+  list-style: none;
+  float: left;
+  width: 100%;
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.padding-right-0 {
+  padding-right: 0 !important;
+}
+
+.error-msgs {
+  padding: 5px;
+  color: red;
+}
