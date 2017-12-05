@@ -1,0 +1,47 @@
+<div class="col-md-12">
+  <h2 class="page-header"><i class="fa fa-list"></i> Categorias</h2>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+          <a ui-sref="app.categoryAdd" class="btn btn-success btn-block">Agregar categoria</a>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-info text-center" ng-show="!results.length">
+            No se encontraron usuarios
+          </div>
+          <div class="table-responsive">
+            <table class="table table-condensed" ng-show="results.length">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr dir-paginate="n in results | itemsPerPage: 20 | orderBy:sortType:sortReverse" total-items="totalUsers">
+                  <td>{{::n.id}}</td>
+                  <td>{{::n.name}}</td>
+                  <td>
+                    <a ui-sref="app.categoryEdit({id: n.id})" class="btn btn-default btn-block btn-xs">
+                      Editar
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pull-right">
+            <dir-pagination-controls max-size="6" on-page-change="page(newPageNumber)"></dir-pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

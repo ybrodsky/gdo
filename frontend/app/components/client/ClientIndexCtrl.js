@@ -13,6 +13,8 @@ gdoApp.controller('ClientIndexCtrl', function($scope, $state, $stateParams, glob
       where: {}
     };
 
+    query = Filter.get(query, $scope.filtros, Object.keys($scope.filtros));
+
     Client.query(query, function(clients, header) {
       $scope.clients = clients;
       $scope.totalClients = header('X-Total-Count');

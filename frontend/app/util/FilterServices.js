@@ -43,6 +43,7 @@ gdoApp.factory('Filter', function($localStorage) {
         budget_id: 'equal',
         cancelled: 'equal-with-zero',
         cancel_limit: 'time-period',
+        category_id: 'equal',
         completed: 'equal',
         createdAt: 'time-period',
         date: 'time-period',

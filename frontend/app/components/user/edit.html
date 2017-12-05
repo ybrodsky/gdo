@@ -1,204 +1,61 @@
 <div class="col-md-12">
   <h2 class="page-header"><i class="fa fa-pencil"></i> Editar usuario</h2>
-
   <div class="panel panel-default">
     <div class="panel-body">
-      <form class="form" name="form" ng-submit="form.$valid && !email_duplicado && update()" novalidate autocomplete="off">
-        <h3 class="page-header"><i class="fa fa-list"></i> Información basica</h3>
+      <form class="form" name="form" ng-submit="form.$valid && update()" novalidate autocomplete="off">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.nombre.$invalid)}">
               <label>Nombre</label>
               <input name="nombre" required type="text" ng-model="user.name" class="form-control">
-              <div ng-messages="form.$submitted && form.nombre.$error">
-                <div ng-messages-include="ngmessages/errors.html"></div>
-              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.apellido.$invalid)}">
               <label>Apellido</label>
               <input type="text" name="apellido" required ng-model="user.surname" class="form-control">
-              <div ng-messages="form.$submitted && form.apellido.$error">
-                <div ng-messages-include="ngmessages/errors.html"></div>
-              </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group" ng-class="{ 'has-error': (email_duplicado) || (form.$submitted && form.email.$invalid)}">
-              <label>Email</label>
+              <label>Nombre de usuario</label>
               <input ng-blur="buscar()" type="email" name="email" required ng-model="user.email" class="form-control">
-              <div ng-messages="(form.$submitted && form.email.$error) || email_duplicado">
-                <div ng-messages-include="ngmessages/errors.html"></div>
-              </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.tele.$invalid)}">
-              <label>Teléfono</label>
-              <input type="text" name="tele" required ng-model="user.phone" class="form-control" autocomplete="off">
-              <div ng-messages="form.$submitted && form.tele.$error">
-                <div ng-messages-include="ngmessages/errors.html"></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label>Interno</label>
-              <input name="interno" type="text" ng-model="user.intern" class="form-control">
-              <p class="help-block">Solo numeros</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
             <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.password.$invalid)}">
               <label>Password</label>
-              <input type="password" name="password" ng-model="user.password" class="form-control" ng-minlength="6">
+              <input type="password" name="password" required ng-model="user.password" class="form-control" ng-minlength="6">
               <p class="help-block">6 caracteres o más</p>
-              <div ng-messages="form.$submitted && form.password.$error">
-                <div ng-messages-include="ngmessages/errors.html"></div>
-              </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.rol.$invalid)}">
               <label>Rol</label>
-              <select ng-model="user.rol_id" name="rol" required class="form-control" ng-options="rol.id as rol.nombre for rol in roles">
+              <select ng-model="user.rol_id" name="rol" required class="form-control">
                 <option value='' disabled>Seleccioná un rol</option>
+                <option value='1'>Administrador</option>
+                <option value='2'>Usuario</option>
               </select>
-              <div ng-messages="form.$submitted && form.rol.$error">
-                <div ng-messages-include="ngmessages/errors.html"></div>
-              </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.unidad.$invalid)}">
-              <label>Unidad de negocio</label>
-              <select ng-model="user.unidad_negocio_id" name="unidad" required class="form-control" ng-options="unidad.id as unidad.nombre for unidad in unidades">
-                <option value='' disabled>Seleccioná una unidad de negocio</option>
-              </select>
-              <div ng-messages="form.$submitted && form.unidad.$error">
-                <div ng-messages-include="ngmessages/errors.html"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h3 class="page-header"><i class="fa fa-cogs"></i> Configuracion</h3>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.username.$invalid)}">
-              <label>Usuario email</label>
-              <input type="text" name="username" required ng-model="user.username" class="form-control">
-              <div ng-messages="form.$submitted && form.username.$error">
-                <div ng-messages-include="ngmessages/errors.html"></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Password email</label>
-              <input type="text" ng-model="user.email_password" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="checkbox">
-              <label>
-                <input ng-model="user.habilitar_correo" type="checkbox">
-                  Habilitar correo
-                </input>
-              </label>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="checkbox">
-              <label>
-                <input ng-model="user.active" type="checkbox">
-                  Usuario activo
-                </input>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Firma</label>
-          <a href="" ng-click="open()" class="pull-right">
-            <i class="fa fa-pencil"></i>
-          </a>
-          <textarea ng-model="user.firma" class="form-control" rows="2">
-          </textarea>
         </div>
 
-        <h3 class="page-header"><i class="fa fa-plane"></i> Configuracion Amadeus</h3>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Office ID</label>
-              <input name="office_id" type="text" ng-model="user.office_id" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Queue</label>
-              <input name="queue" type="text" ng-model="user.queue" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Sub Queue</label>
-              <input name="subqueue" type="text" ng-model="user.sub_queue" class="form-control">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Usuario Amadeus</label>
-              <input name="subqueue" type="text" ng-model="user.usuario_amadeus" class="form-control">
-            </div>
-          </div>
+        <div class="checkbox">
+          <label>
+            <input ng-model="user.active" type="checkbox">
+              Usuario activo
+            </input>
+          </label>
         </div>
+        <hr/>
+
         <div class="form-group pull-right">
           <button class="btn btn-warning" type="submit">
             GUARDAR
           </button>
-        </div>
-      </form>
-    </div>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-  </div>
-
-  <div class="panel panel-danger" restrict="admin">
-    <div class="panel-body">
-      <h3 class="page-header"><i class="fa fa-envelope"></i> Eliminar correos</h3>
-      <form class="form" ng-submit="clean()" novalidate>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="checkbox">
-              <label>
-                <input ng-model="filters.oportunity_id" type="checkbox">
-                  Correos asociados a oportunidad
-                </input>
-              </label>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="checkbox">
-              <label>
-                <input ng-model="filters.etiqueta" type="checkbox">
-                  Correos con etiquetas
-                </input>
-              </label>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <input class="form-control" placeholder="Etiqueta igual a ..." ng-model="filters.etiquetaE">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <button class="btn btn-warning btn-block" type="submit">Eliminar</button>
-          </div>
         </div>
       </form>
     </div>

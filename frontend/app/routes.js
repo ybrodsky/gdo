@@ -26,4 +26,46 @@ gdoApp.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: "client/index.html",
     controller: 'ClientIndexCtrl'
   });
+
+  $stateProvider.state('app.userIndex', {
+    url: "/usuarios",
+    templateUrl: "user/index.html",
+    controller: 'UserIndexCtrl'
+  }).state('app.userAdd', {
+    url: "/usuarios/agregar",
+    templateUrl: "user/add.html",
+    controller: 'UserAddCtrl'
+  }).state('app.userEdit', {
+    url: "/usuarios/editar/:id",
+    templateUrl: "user/edit.html",
+    controller: 'UserEditCtrl'
+  });
+
+  $stateProvider.state('app.categoryIndex', {
+    url: "/categorias",
+    templateUrl: "category/index.html",
+    controller: 'CategoryIndexCtrl'
+  }).state('app.categoryAdd', {
+    url: "/categorias/agregar",
+    templateUrl: "category/add.html",
+    controller: 'CategoryAddCtrl'
+  }).state('app.categoryEdit', {
+    url: "/categorias/editar/:id",
+    templateUrl: "category/edit.html",
+    controller: 'CategoryEditCtrl'
+  });
+
+  $stateProvider.state('app.productIndex', {
+    url: "/productos",
+    templateUrl: "product/index.html",
+    controller: 'ProductIndexCtrl'
+  }).state('app.productAdd', {
+    url: "/productos/agregar",
+    templateUrl: "product/add.html",
+    controller: 'ProductAddCtrl'
+  }).state('app.productEdit', {
+    url: "/productos/editar/:id",
+    templateUrl: "product/edit.html",
+    controller: 'ProductEditCtrl'
+  });
 });

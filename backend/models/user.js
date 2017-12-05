@@ -12,8 +12,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    email: {
+    username: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false
     },
     password: {
@@ -44,7 +45,6 @@ module.exports = function(sequelize, DataTypes) {
           if (err) return reject(err)
 
           user.setDataValue('password', hash);
-          user.setDataValue('username', user.getDataValue('email').split('@')[0]);
           return resolve();
         });
       });

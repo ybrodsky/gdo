@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <h2 class="page-header"><i class="fa fa-users"></i> Usuarios</h2>
+  <h2 class="page-header"><i class="fa fa-gift"></i> Productos</h2>
   <div class="panel panel-default">
     <div class="panel-body">
       <form class="form" ng-submit="page(1)">
@@ -12,14 +12,10 @@
           </div>
           <div class="col-md-3">
             <div class="form-group">
-              <label>Apellido</label>
-              <input type="text" class="form-control" ng-model="filtros.surname" >
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Nombre de usuario</label>
-              <input type="text" class="form-control" ng-model="filtros.username" >
+              <label>Categoria</label>
+              <select class="form-control" ng-model="filtros.category_id" ng-options="c.id as c.name for c in categories">
+                <option value="">Indistinta</option>
+              </select>
             </div>
           </div>
           <div class="col-md-3">
@@ -36,39 +32,34 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-md-10">
-          <div ng-show="users.length">
-            <b>Total de usuarios: {{totalUsers}}</b>
-          </div>
         </div>
         <div class="col-md-2">
-          <a ui-sref="app.userAdd" class="btn btn-success btn-block">Agregar usuario</a>
+          <a ui-sref="app.productAdd" class="btn btn-success btn-block">Agregar usuario</a>
         </div>
       </div>
       <hr/>
       <div class="row">
         <div class="col-md-12">
-          <div class="alert alert-info text-center" ng-show="!users.length">
+          <div class="alert alert-info text-center" ng-show="!results.length">
             No se encontraron usuarios
           </div>
           <div class="table-responsive">
-            <table class="table table-condensed" ng-show="users.length">
+            <table class="table table-condensed" ng-show="results.length">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Nombre y Apellido</th>
-                  <th>Nombre de usuario</th>
-                  <th>Rol</th>
+                  <th>Nombre</th>
+                  <th>Categoria</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr dir-paginate="n in users | itemsPerPage: 20 | orderBy:sortType:sortReverse" total-items="totalUsers">
+                <tr dir-paginate="n in results | itemsPerPage: 20 | orderBy:sortType:sortReverse" total-items="totalUsers">
                   <td>{{::n.id}}</td>
-                  <td>{{::n.name}} {{::n.surname}}</td>
-                  <td>{{::n.surname}}</td>
-                  <td>{{n.rol_id == 1 ? : 'Administrador' : 'Usuario'}}</td>
+                  <td>{{::n.name}}</td>
+                  <td>{{::n.Category.name}}</td>
                   <td>
-                    <a ui-sref="app.userEdit({id: n.id})" class="btn btn-default btn-block btn-xs">
+                    <a ui-sref="app.productEdit({id: n.id})" class="btn btn-default btn-block btn-xs">
                       Editar
                     </a>
                   </td>
