@@ -25,6 +25,22 @@ gdoApp.config(function($stateProvider, $urlRouterProvider) {
     url: "/clientes",
     templateUrl: "client/index.html",
     controller: 'ClientIndexCtrl'
+  }).state('app.clientAdd', {
+    url: "/clientes/agregar",
+    templateUrl: "client/add.html",
+    controller: 'ClientAddCtrl'
+  }).state('app.clientEdit', {
+    url: "/clientes/editar/:id",
+    templateUrl: "client/add.html",
+    controller: 'ClientEditCtrl'
+  }).state('app.clientCuenta', {
+    url: "/clientes/cuenta/:id",
+    templateUrl: "client/cuenta.html",
+    controller: 'ClientCuentaCtrl'
+  }).state('app.saleStat', {
+    url: "/reportes",
+    templateUrl: "sale/stat.html",
+    controller: 'SaleStatCtrl'
   });
 
   $stateProvider.state('app.userIndex', {

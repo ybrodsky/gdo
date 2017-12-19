@@ -5,19 +5,51 @@
       <div class="row">
         <div class="col-md-4">
           <div class="well">
-            <h4 class="page-header"><i class="fa fa-plus-circle"></i> Cargar venta</h4>
-            <form class="form" name="form" ng-submit="form.$valid && create()" novalidate>
-              <div class="form-group">
+            <h4 class="page-header">
+              <i class="fa fa-plus-circle"></i> Cargar venta
+
+              <small class="pull-right">
+                <a ng-click="reset()">Reiniciar formulario</a>
+              </small>
+            </h4>
+            <form 
+              class="form" 
+              name="form" 
+              ng-submit="form.$valid && sale.Products.length && (!sale.paid || sale.paid && sale.client_id) && create()" 
+              novalidate
+            >
+              <div class="form-group" ng-class="{ 'has-error': (form.$submitted && !sale.Products.length)}">
                 <label>Productos</label>
-                <input class="form-control" ng-model="asyncSelected" type="text" typeahead-min-length="3" typeahead-on-select="selected($item)" uib-typeahead="client.id as client.fullname for client in getClient($viewValue)">
+                <input class="form-control" ng-model="asyncSelected" type="text" typeahead-min-length="3" typeahead-on-select="selectedProduct($item)" uib-typeahead="product.name as product.name for product in getProduct($viewValue)">
                 <p class="help-block">
                   <i class="fa fa-exclamation-circle"></i> Ingresá al menos 3 letras y seleccioná del listado
                 </p>
               </div>
+              <table class="table">
+                <tbody>
+                  <tr ng-repeat="product in sale.Products">
+                    <td>{{product.name}}</td>
+                    <td class="text-center">${{product.price}}</td>
+                    <td class="text-right">
+                      <a class="btn btn-xs btn-danger" ng-click="removeProduct($index)">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-              <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input ng-model="sale.paid" type="checkbox">
+                    Cuenta corriente
+                  </input>
+                </label>
+              </div>
+
+              <div class="form-group" ng-show="sale.paid" ng-class="{ 'has-error': (form.$submitted && sale.paid && !sale.client_id)}">
                 <label>Cliente</label>
-                <input class="form-control" ng-model="asyncSelected" type="text" typeahead-min-length="3" typeahead-on-select="selected($item)" uib-typeahead="client.id as client.fullname for client in getClient($viewValue)">
+                <input class="form-control" ng-model="asyncSelected2" type="text" typeahead-min-length="3" typeahead-on-select="selectedClient($item)" uib-typeahead="(client.name + ' ' + client.surname) as (client.name + ' ' + client.surname) for client in getClient($viewValue)">
                 <p class="help-block">
                   <i class="fa fa-exclamation-circle"></i> Ingresá al menos 3 letras y seleccioná del listado
                 </p>
@@ -25,9 +57,10 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon" id="basic-addon3">TOTAL</span>
-                  <input type="text" class="form-control" readonly/>
+                  <input type="text" class="form-control" ng-model="sale.total" readonly/>
                 </div>
               </div>
+              <hr/>
               <div class="form-group">
                 <button class="btn btn-warning btn-block" type="submit">
                   GUARDAR
@@ -37,7 +70,48 @@
           </div>
         </div>
         <div class="col-md-8">
-          <img src="https://lh3.googleusercontent.com/-dn-OSW_mb18/Wh2xp0BLxSI/AAAAAAAAKWw/fMvieZ5Vm74y0W7cTF4fn6Ooflj7OQikgCL0BGAYYCw/h450/2017-11-28.jpg">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form class="form" name="form2" ng-submit="findAll()">
+                <div class="row">
+                  <div class="col-md-4 col-md-offset-4">
+                    <div class="form-group">
+                      <label>Fecha de venta</label>
+                      <input name="desde" ng-click="ss = !ss" type="date" class="form-control" uib-datepicker-popup ng-model="filters.createdAt" is-open="ss" datepicker-options="{}" readonly required />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label><br></label>
+                    <button type="submit" class="btn btn-warning btn-block">Buscar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="alert alert-info text-center" ng-show="sales.length === 0">
+            No se encontraron ventas
+          </div>
+          <table class="table table-bordered" ng-show="sales.length">
+            <thead>
+              <tr>
+                <th>Hora</th>
+                <th>Productos</th>
+                <th class="text-right">Total</th>
+                <th class="w10">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="n in sales">
+                <td>{{n.createdAt | date: 'HH:mm'}}</td>
+                <td>
+                  <div ng-repeat="p in n.Products">{{p.name}}</div>
+                </td>
+                <td class="text-right">${{n.total}}</td>
+                <td><a class="btn btn-xs btn-default" ng-click="removeSale(n)" confirm="¿Anular?">Anular venta</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

@@ -17,32 +17,35 @@
 
       <ul class="nav navbar-nav navbar-left">
         <li>
-        	<a ui-sref="app.productsIndex">Productos</a>
+          <a ui-sref="app.dashboard">Inicio</a>
+        </li>
+        <li>
+        	<a ui-sref="app.productIndex">Productos</a>
       	</li>
+        <li>
+          <a ui-sref="app.categoryIndex">Categorias</a>
+        </li>
       	<li>
         	<a ui-sref="app.clientsIndex">Clientes</a>
       	</li>
-        <li uib-dropdown>
+        <li uib-dropdown restrict="1">
 	        <a href="#" uib-dropdown-toggle>Reportes <b class="caret"></b></a>
 	        <ul class="dropdown-menu">
 	          <li>
-	            <a ui-sref="app.formasPago">Formas de pago</a>
+	            <a ui-sref="app.saleStat">Caja</a>
 	          </li>
 	        </ul>
 	      </li>
+        <li restrict="1">
+          <a ui-sref="app.userIndex">Usuarios</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 	      <li class="" uib-dropdown>
 	        <a  class="" uib-dropdown-toggle>
-	          <i class="fa fa-user"></i>
+	          <i class="fa fa-user"></i> {{user.name}}
 	        </a>
 	        <ul class="dropdown-menu">
-	          <li>
-	            <a ui-sref="app.micuenta"><i class="fa fa-user fa-fw"></i> Mi cuenta</a>
-	          </li>
-	          <li>
-	            <a ui-sref="app.contactoIndex"><i class="fa fa-book fa-fw"></i> Mis contactos</a>
-	          </li>
 	          <li>
 	            <a ui-sref="logout"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
 	          </li>

@@ -1,13 +1,7 @@
-gdoApp.controller('UserIndexCtrl', function($scope, $state, Filter, User, Comun, UnidadesNegocio, Rol) {
+gdoApp.controller('UserIndexCtrl', function($scope, $state, Filter, User, Comun) {
   $scope.filtros = {
     name: null,
-    surname: null,
-    email: null,
-    active: "0",
-    aceptar_consultas: "0",
-    rol_id: null,
-    unidad_negocio_id: null,
-    deleted: "1"
+    surname: null
   };
 
   $scope.filtros = Filter.load($scope.filtros, 'userIndex');
@@ -18,8 +12,7 @@ gdoApp.controller('UserIndexCtrl', function($scope, $state, Filter, User, Comun,
     var query = {
       skip: 20 * (_page - 1),
       limit: 20,
-      populate: [{model: 'rol'}, {model: 'unidadnegocio'}],
-      attributes: ['id', 'name', 'surname', 'email', 'phone', 'intern', 'aceptar_consultas', 'active'],
+      attributes: {exclude: ['password']},
       where: {}
     };
     query = Filter.get(query, $scope.filtros, Object.keys($scope.filtros));
@@ -31,19 +24,4 @@ gdoApp.controller('UserIndexCtrl', function($scope, $state, Filter, User, Comun,
 
   };
   $scope.page(1);
-
-  $scope.delete = function(user) {
-    User.delete({id: user.id}).$promise.then(function() {
-      Comun.toaster('success', 'Usuario', 'El usuario fue borrado');
-      $scope.page(1);
-    });
-  };
-
-  UnidadesNegocio.query({sort: 'nombre ASC'}, function(res) {
-    $scope.unidades = res;
-  });
-
-  Rol.query({sort: 'nombre ASC'}, function(res) {
-    $scope.roles = res;
-  });
 });

@@ -1,0 +1,49 @@
+<div class="col-md-12">
+  <h2 class="page-header"><i class="fa fa-list"></i> Cuenta {{client.name}} {{client.surname}}</h2>
+
+  <div ng-show="sales.length === 0" class="alert alert-info text-center">
+  	No hay items pendientes de pago
+  </div>
+
+  <div ng-show="sales.length">
+	  <table class="table table-bordered" >
+	    <thead>
+	      <tr>
+	        <th>Fecha</th>
+	        <th>Productos</th>
+	        <th class="text-right">Total</th>
+	        <th class="w10">Acciones</th>
+	      </tr>
+	    </thead>
+
+	    <tbody>
+	      <tr ng-repeat="n in sales">
+	        <td>{{n.createdAt | date: 'dd/MM HH:mm'}}</td>
+	        <td>
+	          <div ng-repeat="p in n.Products">{{p.name}}</div>
+	        </td>
+	        <td class="text-right">${{n.total}}</td>
+	        <td>
+	        	<input type="checkbox" ng-click="select(n)" ng-model="n.selected"/>
+	        </td>
+	      </tr>
+	    </tbody>
+	  </table>
+
+	  <hr/>
+
+	  <div class="row">
+	  	<div class="col-md-4 col-md-offset-4">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon3">TOTAL</span>
+          <input type="text" class="form-control" ng-model="total" readonly/>
+        </div>
+	  	</div>
+	  	<div class="col-md-4">
+	  		<button class="btn btn-warning btn-block" ng-click="ids.length && pay()">
+	  			Cancelar
+  			</button>
+	  	</div>
+	  </div>
+  </div>
+</div>

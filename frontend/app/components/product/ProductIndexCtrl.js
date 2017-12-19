@@ -1,4 +1,4 @@
-gdoApp.controller('CategoryIndexCtrl', function($scope, $state, Filter, Product, Category) {
+gdoApp.controller('ProductIndexCtrl', function($scope, $state, Filter, Product, Category) {
   Category.query().$promise.then((res) => {
     $scope.categories = res;
   });
@@ -13,7 +13,8 @@ gdoApp.controller('CategoryIndexCtrl', function($scope, $state, Filter, Product,
     var query = {
       skip: 20 * (_page - 1),
       limit: 20,
-      include: [{model: 'Category'}]
+      include: [{model: 'Category'}],
+      where: {}
     };
 
     query = Filter.get(query, $scope.filtros, Object.keys($scope.filtros));

@@ -9,13 +9,14 @@
 			<div>
 				<div class="row">
 					<div class="col-md-4 col-md-offset-4 text-center">
-						<img src="https://lesamisviajes.com/img/Les-Amis-Viajes.png" height="100" id="login-logo">
+						<h1 class="page-header" style="color: white">GESTION DE OPERACIONES</h1>
+
 						<form class="form" name="form" ng-submit="form.$valid && login()">
 							<div class="form-group">
-								<input type="text" class="form-control width-100" ng-model="auth.email" placeholder="Email"/>
+								<input type="text" class="form-control width-100" ng-model="auth.username" placeholder="Usuario"/>
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control width-100" ng-model="auth.password" placeholder="Password"/>
+								<input type="password" class="form-control width-100" ng-model="auth.password" placeholder="Contraseña"/>
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-danger btn-block">

@@ -66,7 +66,7 @@
                   <td>{{::n.id}}</td>
                   <td>{{::n.name}} {{::n.surname}}</td>
                   <td>{{::n.surname}}</td>
-                  <td>{{n.rol_id == 1 ? : 'Administrador' : 'Usuario'}}</td>
+                  <td>{{n.rol_id == 1 ? 'Administrador' : 'Usuario'}}</td>
                   <td>
                     <a ui-sref="app.userEdit({id: n.id})" class="btn btn-default btn-block btn-xs">
                       Editar

@@ -1,4 +1,4 @@
-gdoApp.controller('ClientIndexCtrl', function($scope, $state, $stateParams, globalVariables, Client) {
+gdoApp.controller('ClientIndexCtrl', function($scope, $state, $stateParams, globalVariables, Filter, Client) {
   $scope.filtros = {
     name: null,
     surname: null,

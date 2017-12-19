@@ -1,6 +1,6 @@
 gdoApp.controller('UserEditCtrl', function($scope, globalVariables, User, Comun, $uibModal, $localStorage, $stateParams, $state) {
 
-  User.get({id: $stateParams.id}).$promise.then(function(user) {
+  User.get({id: $stateParams.id, attributes: {exclude: ['password']}}).$promise.then(function(user) {
     $scope.user = user;
   });
 

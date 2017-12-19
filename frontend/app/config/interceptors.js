@@ -2,8 +2,8 @@ gdoApp.factory('paramsInterceptor', ['$q', '$rootScope', function($q, $rootScope
   return {
     request: function(config) {
       if (config.params) {
-        if (config.params.populate && typeof config.params.populate != 'string') {
-          config.params.populate = JSON.stringify(config.params.populate);
+        if (config.params.include && typeof config.params.include != 'string') {
+          config.params.include = JSON.stringify(config.params.include);
         }
         if (config.params.attributes && typeof config.params.attributes != 'string') {
           config.params.attributes = JSON.stringify(config.params.attributes);
@@ -14,11 +14,24 @@ gdoApp.factory('paramsInterceptor', ['$q', '$rootScope', function($q, $rootScope
   }
 }]);
 
+gdoApp.factory('jwtInterceptor', function($localStorage) {
+  return {
+    request: function(config) {
+      if($localStorage.token) {
+        config.headers.jwt = $localStorage.token;
+      }
+
+      return config;
+    }
+  }
+});
+
 gdoApp.config(function($httpProvider) {
   //$httpProvider.defaults.withCredentials = true;
   $httpProvider.defaults.cache = false;
   $httpProvider.interceptors.push('unauthenticatedHttpResponseInterceptor');
   $httpProvider.interceptors.push('paramsInterceptor');
+  $httpProvider.interceptors.push('jwtInterceptor');
 });
 
 gdoApp.factory('unauthenticatedHttpResponseInterceptor', ['$q', '$injector', '$rootScope',

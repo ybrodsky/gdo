@@ -19,9 +19,9 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <div class="form-group" ng-class="{ 'has-error': (email_duplicado) || (form.$submitted && form.email.$invalid)}">
+            <div class="form-group" ng-class="{ 'has-error': (email_duplicado) || (form.$submitted && form.username.$invalid)}">
               <label>Nombre de usuario</label>
-              <input ng-blur="buscar()" type="email" name="email" required ng-model="user.email" class="form-control">
+              <input ng-blur="buscar()" type="text" name="username" required ng-model="user.username" class="form-control">
             </div>
           </div>
           <div class="col-md-4">

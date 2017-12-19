@@ -19,22 +19,22 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <div class="form-group" ng-class="{ 'has-error': (email_duplicado) || (form.$submitted && form.email.$invalid)}">
+            <div class="form-group" ng-class="{ 'has-error': (email_duplicado) || (form.$submitted && form.username.$invalid)}">
               <label>Nombre de usuario</label>
-              <input ng-blur="buscar()" type="email" name="email" required ng-model="user.email" class="form-control">
+              <input ng-blur="buscar()" type="text" name="username" required ng-model="user.username" class="form-control">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.password.$invalid)}">
               <label>Password</label>
-              <input type="password" name="password" required ng-model="user.password" class="form-control" ng-minlength="6">
+              <input type="password" name="password" ng-model="user.password" class="form-control" ng-minlength="6">
               <p class="help-block">6 caracteres o más</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.rol.$invalid)}">
               <label>Rol</label>
-              <select ng-model="user.rol_id" name="rol" required class="form-control">
+              <select ng-model="user.rol_id" name="rol" required class="form-control" convert-to-number>
                 <option value='' disabled>Seleccioná un rol</option>
                 <option value='1'>Administrador</option>
                 <option value='2'>Usuario</option>

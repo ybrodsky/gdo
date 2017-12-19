@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="form" name="form" ng-submit="fetch()">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Desde</label>
+              <input name="desde" ng-click="ss = !ss" type="date" class="form-control" uib-datepicker-popup ng-model="filters.createdAt.from" is-open="ss" datepicker-options="{}" readonly required />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Hasta</label>
+              <input name="hasta" ng-click="tt = !tt" type="date" class="form-control" uib-datepicker-popup ng-model="filters.createdAt.to" is-open="tt" datepicker-options="{}" readonly required />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+            	<label><br></label>
+            	<button type="submit" class="btn btn-warning btn-block">
+            		Generar informe
+            	</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
