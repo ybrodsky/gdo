@@ -72,14 +72,14 @@ gulp.task('minify-css', function() {
   return gulp.src('dev/css/main.css')
     .pipe(rename('main-' + Math.floor(Date.now() / 1000) + '.min.css'))
     .pipe(minifyCSS())
-    .pipe(gulp.dest('build/css'))
+    .pipe(gulp.dest('../backend/public/build/css'))
 });
 
 gulp.task('merge-partials', function() {
   return gulp.src(['./dev/js/main.js', './dev/partials/partials.js'])
     .pipe(concat('main.js'))
     .pipe(rename('main-' + Math.floor(Date.now() / 1000) + '.min.js'))
-    .pipe(gulp.dest('build/js'))
+    .pipe(gulp.dest('../backend/public/build/js'))
 })
 
 /**
@@ -96,11 +96,14 @@ gulp.task('build', function(cb) {
 * tarea a modo de parche cuando viene del minify
 */
 gulp.task('inject-minify', function () {
-  var target = gulp.src('./index.html');
-  var sources = gulp.src(['./build/js/main-*.js', './build/css/main-*.css'], {read: false});
+  var target = gulp.src('./../backend/views/index.ejs');
+  var sources = gulp.src([
+    process.cwd() + '/../backend/public/build/js/main-*.js',
+    process.cwd() + '/../backend/public/build/css/main-*.css'
+  ], {read: false});
 
   return target.pipe(inject(sources, {relative: true}))
-    .pipe(gulp.dest('.'));
+    .pipe(gulp.dest('./../backend/views/'));
 });
 
 /**
@@ -159,7 +162,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('clean', function(cb) {
-  del(['build/js', 'build/css', 'dev/js', 'dev/css', 'dev/partials'], cb())
+  del(['../backend/public/build/css', '../backend/public/build/js', 'build/js', 'build/css', 'dev/js', 'dev/css', 'dev/partials'], {force: true}, cb())
 });
 
 gulp.task('default', ['clean'], function() {

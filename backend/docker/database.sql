@@ -19,8 +19,8 @@ CREATE TABLE `clients` (
   `email` varchar(255) NOT NULL,
   `dni` int(8) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
-  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `expenses` (
@@ -50,8 +50,8 @@ CREATE TABLE `sales` (
   `units` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `paid` tinyint(1) NOT NULL DEFAULT '1',
-  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `sales_products` (
