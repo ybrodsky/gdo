@@ -30,6 +30,7 @@ app.use(function(req, res, next) {
   return next();
 });
 
+app.use('/', require('./routes/index'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/clients', require('./routes/clients'));
 app.use('/api/providers', require('./routes/providers'));
