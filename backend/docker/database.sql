@@ -28,8 +28,8 @@ CREATE TABLE `clients` (
   `email` varchar(255) DEFAULT NULL,
   `dni` int(8) DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
-  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `clients` (`id`, `name`, `surname`, `phone`, `address`, `email`, `dni`, `active`, `createdAt`, `updatedAt`) VALUES
@@ -70,8 +70,8 @@ CREATE TABLE `sales` (
   `paid` tinyint(1) NOT NULL DEFAULT '1',
   `total` double(10,2) NOT NULL,
   `cancelled` tinyint(1) NOT NULL DEFAULT '0',
-  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `sales` (`id`, `user_id`, `client_id`, `paid`, `total`, `cancelled`, `createdAt`, `updatedAt`) VALUES
