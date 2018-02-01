@@ -18,12 +18,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultValue: 1
     },
+    cancelled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: 0
+    }
   }, {
     tableName: 'sales',
     timestamps: true
   });
 
   Sale.associate = (models) => {
+    Sale.belongsTo(models.User, {foreignKey: 'user_id'});
     Sale.belongsTo(models.Client, {foreignKey: 'client_id'});
     Sale.belongsToMany(models.Product, {
       through: {

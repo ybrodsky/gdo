@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Reporte</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+
+					<h5 class="text-center">Ventas por categorias de producto</h5>
+					<table class="table table-bordered">
+						<% Object.keys(categories).forEach((category) => { %>
+						<tr>
+							<td class="text-right"><%= category %>:</td>
+							<td class="text-right"><%= categories[category] %></td>
+						</tr>
+
+						<% }) %>
+						<tr>
+							<td class="text-right">Ventas totales:</td>
+							<td class="text-right"><%= report.sales %></td>
+						</tr>
+					</table>
+
+					<h5 class="text-center">Ventas por hora</h5>
+					<table class="table table-bordered">
+						<% hours.forEach((hour) => { %>
+						<tr>
+							<td class="text-right"><%= hour[0] %>hs.</td>
+							<td class="text-right">$<%= hour[1] %></td>
+						</tr>
+
+						<% }) %>
+					</table>
+
+					<table class="table table-bordered">
+						<tr>
+							<td class="text-right">Ingreso bruto:</td>
+							<td class="text-right">$<%= report.totalSold %></td>
+						</tr>
+						<tr>
+							<td class="text-right">Ventas a cta. cte. (sin saldar):</td>
+							<td class="text-right">$<%= report.totalUnpaid %></td>
+						</tr>
+						<tr>
+							<td class="text-right">Ingreso neto:</td>
+							<td class="text-right">$<%= report.totalSold - report.totalUnpaid %></td>
+						</tr>
+					</table>
+
+					<h5 class="text-center">Detalle de ventas</h5>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Vendedor</th>
+                <th>Productos</th>
+                <th class="text-right">Total</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            	<% sales.forEach((n) => { %>
+              <tr>
+                <td><%= moment(n.createdAt).subtract(3, 'hours').format('DD/MM/YY HH:mm') %></td>
+                <td><%= n.User.name + ' ' + n.User.surname %></td>
+                <td>
+                	<% n.Products.forEach((p) => { %>
+                  	<div><%= p.name %></div>
+                  <% }) %>
+                </td>
+                <td class="text-right">$<%= n.total %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

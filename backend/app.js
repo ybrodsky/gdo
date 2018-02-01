@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const passport      = require('passport');
 
 const app = express();
 
@@ -21,7 +22,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(passport.initialize());
+//app.use(passport.session());
+require('./config/passport.js')(passport);
 var parseQuery = require('./middlewares/parseQuery');
+
+app.use('/api/auth/me', passport.authenticate('jwt', { session: false }));
+app.use('/api/categories', passport.authenticate('jwt', { session: false }));
+app.use('/api/clients', passport.authenticate('jwt', { session: false }));
+app.use('/api/providers', passport.authenticate('jwt', { session: false }));
+app.use('/api/providers', passport.authenticate('jwt', { session: false }));
+app.use('/api/expenses', passport.authenticate('jwt', { session: false }));
+app.use('/api/products', passport.authenticate('jwt', { session: false }));
+app.use('/api/sales', passport.authenticate('jwt', { session: false }));
+app.use('/api/users', passport.authenticate('jwt', { session: false }));
+
+const isAuthenticated = require('./middlewares/isAuthenticated');
+isAuthenticated.unless = require('express-unless');
+
+app.use('/api', isAuthenticated.unless({
+  path:['/api/auth/login', '/api/auth/logout']
+}));
 
 app.use(function(req, res, next) {
   req.query.all = function() {
@@ -29,7 +50,10 @@ app.use(function(req, res, next) {
   }
   return next();
 });
+app.disable('x-powered-by');
 
+app.use('/', require('./routes/index'));
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/clients', require('./routes/clients'));
 app.use('/api/providers', require('./routes/providers'));

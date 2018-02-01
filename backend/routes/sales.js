@@ -16,12 +16,27 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   let params = req.body;
+  params.user_id = req.user.id;
 
   Sale.create(params).then(function(created) {
 
     created.setProducts(params.Products.map(Product.build.bind(Product))).then((r) => {
       res.send(created);
     });
+  }).catch(function(err) {
+    res.status(400).send({error: err.toString()});
+  });
+});
+
+router.post('/payup', function(req, res, next) {
+  let params = req.body;
+
+  Sale.update({
+    paid: 1
+  }, {
+    where: {id: {'$in': params.ids}}
+  }).then((r) => {
+    return res.send({});
   }).catch(function(err) {
     res.status(400).send({error: err.toString()});
   });
