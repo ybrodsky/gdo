@@ -32,6 +32,9 @@
                     <a ui-sref="app.categoryEdit({id: n.id})" class="btn btn-default btn-block btn-xs">
                       Editar
                     </a>
+                    <a confirm="¿Confirma que desea eliminar?" ng-click="delete(n.id)" class="btn btn-danger btn-block btn-xs">
+                      Eliminar
+                    </a>
                   </td>
                 </tr>
               </tbody>

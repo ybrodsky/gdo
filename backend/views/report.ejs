@@ -63,6 +63,7 @@
                 <th>Fecha</th>
                 <th>Vendedor</th>
                 <th>Productos</th>
+                <th>Cantidad</th>
                 <th class="text-right">Total</th>
               </tr>
             </thead>
@@ -75,6 +76,11 @@
                 <td>
                 	<% n.Products.forEach((p) => { %>
                   	<div><%= p.name %></div>
+                  <% }) %>
+                </td>
+                <td>
+                	<% n.Products.forEach((p) => { %>
+                  	<div><%= p.SaleProduct.amount %></div>
                   <% }) %>
                 </td>
                 <td class="text-right">$<%= n.total %></td>

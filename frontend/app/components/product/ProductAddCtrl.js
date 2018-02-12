@@ -4,7 +4,9 @@ gdoApp.controller('ProductAddCtrl', function($scope, globalVariables, Category, 
   	price: 0
   }
 
-  Category.query().$promise.then((res) => {
+  Category.query({
+    where: {active: true}
+  }).$promise.then((res) => {
     $scope.categories = res;
   });
 

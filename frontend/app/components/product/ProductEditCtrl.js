@@ -1,6 +1,8 @@
 gdoApp.controller('ProductEditCtrl', function($scope, globalVariables, Category, Product, Comun, $uibModal, $localStorage, $stateParams, $state) {
 
-  Category.query().$promise.then((res) => {
+  Category.query({
+    where: {active: true}
+  }).$promise.then((res) => {
     $scope.categories = res;
   });
 

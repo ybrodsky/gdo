@@ -15,8 +15,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/report/:from/:to', function(req, res, next) {
-	let from = req.query.from ? moment(req.query.from) : moment();
-	let to = req.query.to ? moment(req.query.to) : moment();
+	let from = req.params.from ? moment(req.params.from) : moment();
+	let to = req.params.to ? moment(req.params.to) : moment();
 
 	Sale.findAll({
 		where: {

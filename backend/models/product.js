@@ -17,6 +17,10 @@ module.exports = function(sequelize, DataTypes) {
     price: {
       type: DataTypes.DOUBLE,
       defaultValue: 0
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: 1
     }
   }, {
     tableName: 'products',

@@ -1,7 +1,9 @@
 const express = require('express');
 const Sale  	= require('../models').Sale;
+const SaleProduct = require('../models').SaleProduct;
 const Product = require('../models').Product;
 const router 	= express.Router();
+const _ = require('lodash');
 
 router.get('/', function(req, res, next) {
 	let params = req.query.all();
@@ -18,9 +20,15 @@ router.post('/', function(req, res, next) {
   let params = req.body;
   params.user_id = req.user.id;
 
-  Sale.create(params).then(function(created) {
+  Sale.create(_.omit(params, 'Products')).then(function(created) {
 
-    created.setProducts(params.Products.map(Product.build.bind(Product))).then((r) => {
+    return Promise.all(params.Products.map(item => {
+      return SaleProduct.create({
+        product_id: item.product_id, 
+        amount: item.amount,
+        sale_id: created.getDataValue('id')
+      });
+    })).then((r) => {
       res.send(created);
     });
   }).catch(function(err) {

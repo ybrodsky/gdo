@@ -41,7 +41,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="alert alert-info text-center" ng-show="!results.length">
-            No se encontraron usuarios
+            No se encontraron productos
           </div>
           <div class="table-responsive">
             <table class="table table-condensed" ng-show="results.length">
@@ -61,6 +61,9 @@
                   <td>
                     <a ui-sref="app.productEdit({id: n.id})" class="btn btn-default btn-block btn-xs">
                       Editar
+                    </a>
+                    <a confirm="¿Confirma que desea eliminar?" ng-click="delete(n.id)" class="btn btn-danger btn-block btn-xs">
+                      Eliminar
                     </a>
                   </td>
                 </tr>

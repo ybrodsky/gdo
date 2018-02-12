@@ -56,6 +56,7 @@
                 <th>Email</th>
                 <th>Teléfono</th>
                 <th>Domicilio</th>
+                <th>Activo</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -68,6 +69,7 @@
                 <td>{{::n.email}}</td>
                 <td>{{::n.phone}}</td>
                 <td>{{::n.address}}</td>
+                <th>{{n.active ? 'Si' : 'No'}}</th>
                 <td>
                   <a ui-sref="app.clientEdit({id: n.id})" class="btn btn-default btn-xs">
                     Editar

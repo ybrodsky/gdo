@@ -48,7 +48,20 @@ gdoApp.controller('DashboardCtrl', function($scope, $window, globalVariables, $s
 
   $scope.create = () => {
   	$scope.sale.paid = !$scope.sale.paid;
-  	let sale = new Sale($scope.sale);
+
+    let sale = angular.copy($scope.sale);
+
+    //te vas a la puta que te pario
+    sale.Products = sale.Products.reduce((acc, cur) => {
+      acc.push({
+        product_id: cur.product.id,
+        amount: cur.amount
+      });
+
+      return acc;
+    }, []);
+
+  	sale = new Sale(sale);
   	sale.$save().then((created) => {
       Comun.toaster('success', 'Venta', 'La venta fue registrada');
       $scope.reset();
@@ -59,7 +72,10 @@ gdoApp.controller('DashboardCtrl', function($scope, $window, globalVariables, $s
 
   $scope.getProduct = function(query) {
   	return Product.query({
-  		where: {name: {'$like': query + '%'}}
+  		where: {
+        name: {'$like': query + '%'},
+        active: true
+      }
   	}).$promise.then((results) => {
   		return results;
   	})
@@ -68,6 +84,7 @@ gdoApp.controller('DashboardCtrl', function($scope, $window, globalVariables, $s
   $scope.getClient = (query) => {
 		return Client.query({
   		where: {
+        active: true,
   			'$or': [{
   				name: {'$like': query + '%'},
   			}, {
@@ -84,13 +101,23 @@ gdoApp.controller('DashboardCtrl', function($scope, $window, globalVariables, $s
   }
 
   $scope.selectedProduct = (product) => {
-  	$scope.sale.Products.push(product);
-  	$scope.sale.total += product.price;
+  	$scope.sale.Products.push({
+      amount: 1,
+      product
+    });
+
+  	$scope.getTotal();
   	$scope.asyncSelected = null;
   }
 
   $scope.removeProduct = (index) => {
   	$scope.sale.total -= $scope.sale.Products[index].price;
   	$scope.sale.Products.splice(index, 1);
+  }
+
+  $scope.getTotal = () => {
+    $scope.sale.total = $scope.sale.Products.reduce((total, cur) => {
+      return total + (cur.product.price * cur.amount);
+    }, 0);
   }
 });

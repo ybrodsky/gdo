@@ -5,6 +5,10 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: 1
     }
   }, {
     tableName: 'categories',
